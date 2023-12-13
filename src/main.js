@@ -1,0 +1,28 @@
+import { createApp } from "vue";
+import "./assets/scss/app.scss";
+import "bootstrap";
+import "bootstrap/dist/js/bootstrap.bundle";
+import "@vueform/multiselect/themes/default.css";
+import 'dropzone-vue/dist/dropzone-vue.common.css';
+import App from "./App.vue";
+import router from "./router/index.js";
+import VueApexCharts from "vue3-apexcharts";
+import VueFeather from "vue-feather";
+import Breadcrumbs from "./components/bread_crumbs.vue";
+import DropZone from "dropzone-vue";
+import store from "./store";
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+import io from 'socket.io-client';
+
+const socket = io(`${import.meta.env.VITE_API_CLIENT}`);
+const app = createApp(App);
+app.config.globalProperties.$socket = socket;
+app.use(router);
+app.use(store);
+app.component("Breadcrumbs", Breadcrumbs);
+app.component("apexchart", VueApexCharts);
+app.component(VueFeather.name, VueFeather);
+app.use(DropZone);
+app.use(VueSweetalert2);
+app.mount("#app");
