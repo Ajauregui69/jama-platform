@@ -168,7 +168,7 @@ export default {
       } else {
         store.dispatch("setShowLoader")
         axios
-          .put(`${import.meta.env.VITE_API_CLIENT}/auth/newpassword`, {
+          .put(`${import.meta.env.VITE_API_JAMA}/auth/newpassword`, {
             token: this.$route.params.token,
             password: this.state.password.password,
           })

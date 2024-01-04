@@ -115,7 +115,7 @@ export default {
 
     mounted() {
         // this.getUserConfig();
-        axios.get(`${import.meta.env.VITE_API_CLIENT}/usersconfig`)
+        axios.get(`${import.meta.env.VITE_API_JAMA}/usersconfig`)
             .then((r) => {
                 this.$store.dispatch('userconfig/show', r.data);
 
@@ -176,7 +176,7 @@ export default {
             formData.append("userconfiguration", JSON.stringify(userconfig));
 
             axios
-                .put(`${import.meta.env.VITE_API_CLIENT}/usersconfig`, formData)
+                .put(`${import.meta.env.VITE_API_JAMA}/usersconfig`, formData)
                 .then((r) => {
                     this.$store.dispatch('user/profile', formData); // Dispatchea la acción con los datos
                     notify.success("Your userconfig has been successfully submitted.");

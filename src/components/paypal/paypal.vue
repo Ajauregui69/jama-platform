@@ -112,7 +112,7 @@ export default {
     async capturePayment(orderId) {
       try {
         const response = await axios.post(
-          `${import.meta.env.VITE_API_CLIENT}/capture/${orderId}`,
+          `${import.meta.env.VITE_API_JAMA}/capture/${orderId}`,
           {
             id: this.hackerUserId,
           }
@@ -126,7 +126,7 @@ export default {
 
     async saveDataOrder(dataOrder, hackerId) {
       try {
-        const response = await axios.post(`${import.meta.env.VITE_API_CLIENT}/orders`, {
+        const response = await axios.post(`${import.meta.env.VITE_API_JAMA}/orders`, {
           orderId: dataOrder.data.responseCapture.data.id,
           hackerId: this.hackerID,
           reportId: this.reportID,

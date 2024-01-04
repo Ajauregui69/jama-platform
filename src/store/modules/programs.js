@@ -23,8 +23,8 @@ const mutations = {
   setPrograms: (state, payload) => {
     state.programs = [];
     const apiUrl = payload
-      ? `${import.meta.env.VITE_API_CLIENT}/programs?${payload}`
-      : `${import.meta.env.VITE_API_CLIENT}/programs?`;
+      ? `${import.meta.env.VITE_API_JAMA}/programs?${payload}`
+      : `${import.meta.env.VITE_API_JAMA}/programs?`;
 
     axios.defaults.headers.common["Authorization"] = `Bearer ${cookies.get(
       "token_value"
@@ -43,7 +43,7 @@ const mutations = {
     axios.defaults.headers.common["Authorization"] = `Bearer ${cookies.get(
       "token_value"
     )}`;
-    axios.get(`${import.meta.env.VITE_API_CLIENT}/programs/${payload}`).then(r => {
+    axios.get(`${import.meta.env.VITE_API_JAMA}/programs/${payload}`).then(r => {
       state.assets = r.data.assets
       state.program = r.data.program
       state.programReport = r.data.programReport
@@ -59,7 +59,7 @@ const mutations = {
   },
   getVulns(state) {
     axios
-      .get(`${import.meta.env.VITE_API_CLIENT}/vulns`)
+      .get(`${import.meta.env.VITE_API_JAMA}/vulns`)
       .then((r) => {
         r.data.forEach((element) => {
           state.options.push({ label: element.name, value: element.id });

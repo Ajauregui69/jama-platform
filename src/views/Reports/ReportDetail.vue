@@ -397,7 +397,7 @@ export default {
 
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_CLIENT}/usersconfig/${this.report.report.hacker_id}`
+          `${import.meta.env.VITE_API_JAMA}/usersconfig/${this.report.report.hacker_id}`
         );
 
         // Asignar los valores a las variables del componente
@@ -558,7 +558,7 @@ export default {
 
       formData.append("reply", JSON.stringify(reply));
       axios
-        .post(`${import.meta.env.VITE_API_CLIENT}/reply/${this.$route.params.id}`, formData)
+        .post(`${import.meta.env.VITE_API_JAMA}/reply/${this.$route.params.id}`, formData)
         .then((r) => {
 
           this.$store.dispatch("reports/show", this.$route.params.id);

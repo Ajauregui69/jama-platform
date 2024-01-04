@@ -127,7 +127,7 @@ export default {
 
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_CLIENT}/usersconfig/${report.hacker_id}`
+          `${import.meta.env.VITE_API_JAMA}/usersconfig/${report.hacker_id}`
         );
         // Asignar los valores a las variables del componente
         this.clientIdPaypal = response.data.clientIdPaypal;

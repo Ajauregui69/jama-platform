@@ -115,7 +115,7 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           const apiUrl = `${
-            import.meta.env.VITE_API_CLIENT
+            import.meta.env.VITE_API_JAMA
           }/programs/status/${id}`;
           axios
             .put(apiUrl /* Tu cuerpo de solicitud aquí */)
@@ -159,7 +159,7 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           const apiUrl = `${
-            import.meta.env.VITE_API_CLIENT
+            import.meta.env.VITE_API_JAMA
           }/programs/status/${id}`;
           axios
             .put(apiUrl /* Tu cuerpo de solicitud aquí */)

@@ -10,7 +10,10 @@
               <h3>Vulnerabilities</h3>
             </div>
             <div class="card-block row">
-              <div class="col-sm-12 col-lg-12 col-xl-12">               
+              <div class="col-sm-12 col-lg-12 col-xl-12">
+                <pre>
+                  {{ vulns }}
+                </pre>          
                 <!-- <div class="table-responsive">
                   <table class="table table-hover">      
                     <thead class="table-dark">
@@ -91,76 +94,57 @@
   </div>
 </template>
 <script>
-// import { mapState } from "vuex";
-// import { useLoading } from "vue3-loading-overlay";
-// import store from "../../store";
-// import modalInvoice from "../payment/modalInvoice.vue";
+import { mapState } from "vuex";
+import { useLoading } from "vue3-loading-overlay";
+import store from "../store";
 
 export default {
-  // components: { modalInvoice },
-  // data() {
-  //   return {
-  //     isRowHighlighted: -1, // Inicialmente ninguna fila resaltada
-  //     ticketID: "",
-  //     hackerUsName: "",
-  //     hackerPhoto: "",
-  //     notePayment: "",
-  //     datePayment: "",
-  //     reportTitle: "",
-  //     severity: "",
-  //     rating: "",
-  //     amount: "",
-  //   };
-  // },
-  // computed: {
-  //   ...mapState({
-  //     payments: (state) => state.payments.payments,
-  //   }),
-  // },
-  // methods: {
-  //   // Esta función se llama cuando se hace clic en el botón "Invoice"
-  //   openInvoiceModal(index) {
-  //     const payment = this.payments[index]; // Obtiene el elemento en el índice dado
-  //     this.ticketID = payment.id;
-  //     this.hackerUsName = payment.hacker.username;
-  //     this.notePayment = payment.note;
-  //     this.datePayment = this.formattedDate(payment.created_at);
-  //     this.hackerPhoto = payment.hacker.photo;
-  //     this.reportTitle = payment.report.title;
-  //     this.severity = payment.report.severity;
-  //     this.rating = payment.report.rating;
-  //     this.amount = payment.amount;
+  data() {
+    return {
+      isRowHighlighted: -1, // Inicialmente ninguna fila resaltada
+      ticketID: "",
+      hackerUsName: "",
+      hackerPhoto: "",
+      notePayment: "",
+      datePayment: "",
+      reportTitle: "",
+      severity: "",
+      rating: "",
+      amount: "",
+    };
+  },
+  computed: {
+    ...mapState({
+      vulns: (state) => state.programs.options,
+    }),
+  },
+  methods: {
+    highlightRow(index) {
+      this.isRowHighlighted = index;
+    },
+    unhighlightRow() {
+      this.isRowHighlighted = -1; // Para desactivar el resaltado cuando se quita el cursor
+    },
+    formattedDate(dateString) {
+      const date = new Date(dateString);
+      const options = {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+      };
+      return date.toLocaleString("en-EN", options);
+    },
+  },
+  beforeRouteEnter(to, from, next) {
+    store.dispatch("setShowLoader")
 
-  //     // Abre el modal aquí (puedes usar un sistema de modal específico)
-  //     // Por ejemplo, mostrar un modal usando Bootstrap
-  //     $("#grid-modal_invoice").modal("show");
-  //   },
-  //   highlightRow(index) {
-  //     this.isRowHighlighted = index;
-  //   },
-  //   unhighlightRow() {
-  //     this.isRowHighlighted = -1; // Para desactivar el resaltado cuando se quita el cursor
-  //   },
-  //   formattedDate(dateString) {
-  //     const date = new Date(dateString);
-  //     const options = {
-  //       year: "numeric",
-  //       month: "2-digit",
-  //       day: "2-digit",
-  //       hour: "2-digit",
-  //       minute: "2-digit",
-  //     };
-  //     return date.toLocaleString("en-EN", options);
-  //   },
-  // },
-  // beforeRouteEnter(to, from, next) {
-  //   store.dispatch("setShowLoader")
+    store.dispatch("programs/vulns");
 
-  //   store.dispatch("payments/show");
-
-  //   store.dispatch("setHideLoader")
-  //   next();
-  // },
+    store.dispatch("setHideLoader")
+    next();
+  },
 };
 </script>
 <style scoped lang="scss">

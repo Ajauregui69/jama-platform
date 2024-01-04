@@ -51,15 +51,6 @@
                       name="companyEmail"
                       placeholder="Company Email"
                     />
-                    <label>Company Name</label>
-                    <input
-                      v-model="state.companyName"
-                      type="text"
-                      class="form-control"
-                      :class="v$.companyName.$error ? 'is-invalid' : ''"
-                      name="companyName"
-                      placeholder="Company Name"
-                    />
                     <label>Password</label>
 
                     <input
@@ -206,7 +197,6 @@ export default defineComponent({
       lastName: "",
       name: "",
       email: "",
-      companyName: "",
       password: {
         password: "",
         confirmPassword: "",
@@ -225,7 +215,6 @@ export default defineComponent({
         lastName: { required },
         name: { required },
         email: { required, email },
-        companyName: { required },
         password: {
           password: {
             required,
@@ -262,12 +251,11 @@ export default defineComponent({
       } else {
         store.dispatch("setShowLoader")
         axios
-          .post(`${import.meta.env.VITE_API_CLIENT}/auth/singup`, {
+          .post(`${import.meta.env.VITE_API_JAMA}/auth/singup`, {
             email: this.state.email,
             password: this.state.password.password,
             company_user_name: this.state.name,
             last_name: this.state.lastName,
-            company_name: this.state.companyName,
           })
           .then((r) => {
             this.notify.success("Thanks for joining JAMA Security");

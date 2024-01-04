@@ -17,7 +17,8 @@ import reports from "./modules/reports";
 import userconfig from "./modules/userconfig";
 import dashboard from "./modules/dashboard";
 import payments from "./modules/payments";
-import loader from "./modules/loader"
+import loader from "./modules/loader";
+import usersList from "./modules/usersList";
 
 
 export default createStore({
@@ -64,6 +65,7 @@ export default createStore({
     userconfig,
     dashboard,
     payments,
-    loader
+    loader,
+    usersList
   },
 });

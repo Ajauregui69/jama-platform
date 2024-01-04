@@ -23,7 +23,7 @@ const mutations = {
 
     setConfig: (state) => {
         axios
-          .get(`${import.meta.env.VITE_API_CLIENT}/usersconfig`)
+          .get(`${import.meta.env.VITE_API_JAMA}/usersconfig`)
           .then((r) => {
             state.config = r.data.userConfig;
           })

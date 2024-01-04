@@ -6,13 +6,6 @@ import RecentSalesCard from "../components/RecentSalesCard.vue";
 import BuyCoinsCard from "../components/BuyCoinsCard.vue";
 import barChart from "../components/chart/barChart.vue";
 
-//Variables for OverallCard
-// let overall = {
-//   nameBot: 'Ganancia',
-//   dataBot: [200, 200, 350, 400, 200, 250, 250, 350, 350, 500, 500, 300],
-//   nameTop: 'Gasto',
-//   dataTop: [400, 600, 700, 400, 700, 800, 800, 850, 850, 900, 900, 700]
-// }
 </script>
 
 <script>

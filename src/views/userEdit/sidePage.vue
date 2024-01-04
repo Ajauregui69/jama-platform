@@ -200,13 +200,13 @@ export default {
       formData.append("user_image", newPhoto);
 
       axios
-        .post(`${import.meta.env.VITE_API_CLIENT}/usersconfig/files`, formData)
+        .post(`${import.meta.env.VITE_API_JAMA}/usersconfig/files`, formData)
         .then((r) => {
           const responseData = r.data;
 
           axios
             .put(
-              `${import.meta.env.VITE_API_CLIENT}/usersconfig/photo`,
+              `${import.meta.env.VITE_API_JAMA}/usersconfig/photo`,
               responseData
             )
             .then((r) => {
@@ -230,7 +230,7 @@ export default {
     loadUserData() {
       // Llama a la API para obtener la información actualizada desde la base de datos
       axios
-        .get(`${import.meta.env.VITE_API_CLIENT}/usersconfig`)
+        .get(`${import.meta.env.VITE_API_JAMA}/usersconfig`)
         .then((r) => {
           this.$store.dispatch("userconfig/show", r.data); // Dispatchea la acción con los datos
           // Actualiza otras propiedades de datos según sea necesario

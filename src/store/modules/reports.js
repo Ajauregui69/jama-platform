@@ -28,7 +28,7 @@ const getters = {};
 const mutations = {
   reportsList: (state, value) => {
     axios
-      .get(`${import.meta.env.VITE_API_CLIENT}/reports/${value}`)
+      .get(`${import.meta.env.VITE_API_JAMA}/reports/${value}`)
       .then((r) => {
         state.reports = r.data.reports;
         state.reportsAll = r.data.reportsAll;
@@ -47,7 +47,7 @@ const mutations = {
   },
   reportDetail: (state, value) => {
     axios
-      .get(`${import.meta.env.VITE_API_CLIENT}/report/${value}`)
+      .get(`${import.meta.env.VITE_API_JAMA}/report/${value}`)
       .then((r) => {
         state.report = r.data;
       })
@@ -57,7 +57,7 @@ const mutations = {
   },
   reportReply: (state) => {
     axios
-      .get(`${import.meta.env.VITE_API_CLIENT}/reply`)
+      .get(`${import.meta.env.VITE_API_JAMA}/reply`)
       .then((r) => {
         state.reportReply = r.data;
       })

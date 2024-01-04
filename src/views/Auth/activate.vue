@@ -34,7 +34,7 @@ export default {
     store.dispatch("setShowLoader")
 
     axios
-      .post(`${import.meta.env.VITE_API_CLIENT}/auth/activate/` + this.token)
+      .post(`${import.meta.env.VITE_API_JAMA}/auth/activate/` + this.token)
       .then((r) => {
         store.dispatch("setHideLoader")
         this.notify.success("The user has been activated");

@@ -154,7 +154,7 @@ export default {
       } else {
         store.dispatch("setShowLoader")
         axios
-          .post(`${import.meta.env.VITE_API_CLIENT}/auth/login`, {
+          .post(`${import.meta.env.VITE_API_JAMA}/auth/login`, {
             email: this.state.email,
             password: this.state.password.password,
           })

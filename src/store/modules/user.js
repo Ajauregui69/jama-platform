@@ -16,7 +16,7 @@ const mutations = {
       "token_value"
     )}`;
     axios
-      .get(`${import.meta.env.VITE_API_CLIENT}/auth/profile`)
+      .get(`${import.meta.env.VITE_API_JAMA}/auth/profile`)
       .then((r) => {
         state.profile = r.data
       })

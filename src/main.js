@@ -15,7 +15,7 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import io from 'socket.io-client';
 
-const socket = io(`${import.meta.env.VITE_API_CLIENT}`);
+const socket = io(`${import.meta.env.VITE_API_JAMA}`);
 const app = createApp(App);
 app.config.globalProperties.$socket = socket;
 app.use(router);

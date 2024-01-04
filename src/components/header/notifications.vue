@@ -5,10 +5,11 @@
         <use href="@/assets/svg/icon-sprite.svg#notification"></use>
       </svg>
       <span class="badge rounded-pill badge-secondary" v-show="!hideBadge">
-        {{ showDiv(replies.replys) }}
+        3
+        <!-- {{ showDiv(replies.replys) }} -->
       </span>
-  </div>
-    <div
+    </div>
+    <!-- <div
       class="notification-dropdown onhover-show-div"
       :class="{ active: notification }"
     >
@@ -28,103 +29,103 @@
           <br/>
         </div>
       </ul>
-    </div>
+    </div> -->
   </li>
 </template>
 
 <script>
-  import { mapState } from "vuex";
-  import axios from "axios";
+  // import { mapState } from "vuex";
+  // import axios from "axios";
 
-  export default {
-    name: 'Notifications',
-    data() {
-      return {
-        hideBadge: false,
-        // Otros datos iniciales
-      };
-    },
-    computed: {
-      ...mapState({
-        replies: (state) => state.reports.reportReply,
-      })
-    },
-    beforeMount() {
-      this.$store.dispatch("reports/reply");
-    },
+  // export default {
+  //   name: 'Notifications',
+  //   data() {
+  //     return {
+  //       hideBadge: false,
+  //       // Otros datos iniciales
+  //     };
+  //   },
+  //   computed: {
+  //     ...mapState({
+  //       replies: (state) => state.reports.reportReply,
+  //     })
+  //   },
+  //   beforeMount() {
+  //     this.$store.dispatch("reports/reply");
+  //   },
 
-    created() {
-       this.$socket.on('notification', (data) => {
-          this.$store.dispatch("reports/reply");
-          this.hideBadge = false;
-        });
-    },
+  //   created() {
+  //      this.$socket.on('notification', (data) => {
+  //         this.$store.dispatch("reports/reply");
+  //         this.hideBadge = false;
+  //       });
+  //   },
 
-    methods: {
+  //   methods: {
 
-      changeRoute(id) {
-        this.$router.push(`/reports/all/report/${id}`);
-      },
+  //     changeRoute(id) {
+  //       this.$router.push(`/reports/all/report/${id}`);
+  //     },
 
-      formattedDate(dateString) {
-        const date = new Date(dateString);
-        const now = new Date();
-        const timeDifference = now - date;
+  //     formattedDate(dateString) {
+  //       const date = new Date(dateString);
+  //       const now = new Date();
+  //       const timeDifference = now - date;
 
-        // 1 hora en milisegundos
-        const oneHour = 60 * 60 * 1000;
+  //       // 1 hora en milisegundos
+  //       const oneHour = 60 * 60 * 1000;
 
-        if (timeDifference >= oneHour && timeDifference < 24 * oneHour) {
-          // Si la diferencia de tiempo es mayor o igual a 1 hora y menor a 24 horas, mostrar las horas
-          const hoursPassed = Math.floor(timeDifference / oneHour);
-          return `${hoursPassed} ${hoursPassed === 1 ? "hour" : "hours"} ago`;
-        } else if (timeDifference >= 24 * oneHour) {
-          // Si la diferencia de tiempo es mayor o igual a 24 horas, mostrar la fecha y hora completa
-          const options = {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-          };
-          return date.toLocaleString("en-EN", options);
-        } else {
-          // Si la diferencia de tiempo es menor a 1 hora, mostrar los minutos
-          const minutesPassed = Math.floor(timeDifference / (60 * 1000));
-          return `${minutesPassed} ${minutesPassed === 1 ? "minute" : "minutes"} ago`;
-        }
-      },
+  //       if (timeDifference >= oneHour && timeDifference < 24 * oneHour) {
+  //         // Si la diferencia de tiempo es mayor o igual a 1 hora y menor a 24 horas, mostrar las horas
+  //         const hoursPassed = Math.floor(timeDifference / oneHour);
+  //         return `${hoursPassed} ${hoursPassed === 1 ? "hour" : "hours"} ago`;
+  //       } else if (timeDifference >= 24 * oneHour) {
+  //         // Si la diferencia de tiempo es mayor o igual a 24 horas, mostrar la fecha y hora completa
+  //         const options = {
+  //           year: "numeric",
+  //           month: "2-digit",
+  //           day: "2-digit",
+  //           hour: "2-digit",
+  //           minute: "2-digit",
+  //         };
+  //         return date.toLocaleString("en-EN", options);
+  //       } else {
+  //         // Si la diferencia de tiempo es menor a 1 hora, mostrar los minutos
+  //         const minutesPassed = Math.floor(timeDifference / (60 * 1000));
+  //         return `${minutesPassed} ${minutesPassed === 1 ? "minute" : "minutes"} ago`;
+  //       }
+  //     },
 
-      showDiv(data) {
-        if(data){
-          let cont = 0;
-          for(let i = 0; i < data.length ; i++){
-            if(data[i].status === "active"){
-              cont += 1;
-            }
-          }
-          if (cont == 0){
-            this.hideBadge = true;
-          }
-          else{
-            return cont
-          }
-        }
-      },
+  //     showDiv(data) {
+  //       if(data){
+  //         let cont = 0;
+  //         for(let i = 0; i < data.length ; i++){
+  //           if(data[i].status === "active"){
+  //             cont += 1;
+  //           }
+  //         }
+  //         if (cont == 0){
+  //           this.hideBadge = true;
+  //         }
+  //         else{
+  //           return cont
+  //         }
+  //       }
+  //     },
 
-      removeDiv() {
-        if(this.hideBadge === false){
-          axios
-          .put(`${import.meta.env.VITE_API_CLIENT}/reply/`)
-          .catch((e) => {
-            console.log(e);
-          });
-        }
-        this.hideBadge = true;
-      }
+  //     removeDiv() {
+  //       if(this.hideBadge === false){
+  //         axios
+  //         .put(`${import.meta.env.VITE_API_JAMA}/reply/`)
+  //         .catch((e) => {
+  //           console.log(e);
+  //         });
+  //       }
+  //       this.hideBadge = true;
+  //     }
 
-    },
-  };
+  //   },
+  // };
 </script>
 
 <style lang="scss" scoped>

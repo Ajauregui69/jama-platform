@@ -112,7 +112,7 @@ export default {
         store.dispatch("setShowLoader")
 
         axios
-          .post(`${import.meta.env.VITE_API_CLIENT}/auth/forgotPassword`, {
+          .post(`${import.meta.env.VITE_API_JAMA}/auth/forgotPassword`, {
             email: this.state.email,
           })
           .then(() => {

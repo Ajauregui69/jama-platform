@@ -7,7 +7,7 @@ const getters = {};
 const mutations = {
   sbBySeverity: (state) => {
     axios
-      .get(`${import.meta.env.VITE_API_CLIENT}/dashboard`)
+      .get(`${import.meta.env.VITE_API_JAMA}/dashboard`)
       .then((r) => {
         state.dashboard = r.data;
       })
