@@ -214,34 +214,28 @@
               </select>
             </div>
             <button
-              class="btn btn-primary"
+              class="btn btn-primary btn-score"
               type="button"
               data-bs-toggle="modal"
               data-original-title="test"
-              data-bs-target="#grid-modal"
+              data-bs-target="#grid-score"
               @click="getDataPaymet"
             >
-              Make payment
+              Change Score
             </button>
             <div
               class="modal fade"
-              id="grid-modal"
+              id="grid-score"
               tabindex="-1"
               role="dialog"
-              aria-labelledby="grid-modal"
+              aria-labelledby="grid-score"
               aria-hidden="true"
             >
-              <modalPayments
-                :hackerName="hackerName"
-                :hackerUserId="hackerUserId"
-                :hackerID="hackerID"
-                :rating="rating"
-                :clientIdPaypal="clientIdPaypal"
-                :secretPaypal="secretPaypal"
-                :urlPhoto="urlPhoto"
-                :reportID="reportID"
-                :payment="payment"
-              ></modalPayments>
+              <modalScore
+                :reportName="report.report.title"
+                :reportId="report.report.id"
+                :reportScore="report.report.score"
+              ></modalScore>
             </div>
             <!-- <button
               class="btn btn-primary"
@@ -326,12 +320,14 @@ import { useLoading } from "vue3-loading-overlay";
 import modalFiles from "../Reports/modalFiles.vue";
 import store from "../../store";
 import modalPayments from "../../components/paypal/modalPayments.vue";
+import modalScore from "../../components/modalScore.vue"
 import { toast } from "vue3-toastify";
 
 export default {
   components: {
     modalFiles,
     modalPayments,
+    modalScore,
   },
   name: "ReportDetail",
   computed: {
@@ -340,16 +336,6 @@ export default {
     }),
     createdAt() {
       return moment(this.report.created_at).format("Do MMM YY");
-    },
-    selectedOption: {
-      get() {
-        return this.report.report.rating || null; // Asegúrate de manejar el caso en que no haya rating
-      },
-    },
-    selectedStatus: {
-      get() {
-        return this.report.report.status || null; // Asegúrate de manejar el caso en que no haya rating
-      },
     },
   },
   created() {
@@ -363,6 +349,8 @@ export default {
       dataLoaded: false, // Controlar si los datos están cargados
       loadingInstance: null, // Almacenar la instancia del loader
       inboxData: inboxData,
+      selectedStatus: "",
+      selectedOption: "",
       selectedOp: null,
       selectedSt: null,
       filePreviews: [],
@@ -383,6 +371,7 @@ export default {
   },
   mounted() {
     this.loadData();
+    console.log("avcees")
   },
   updated() {
     // Verifica si dataLoaded es verdadero y si el elemento con ref="chatMessages" existe
@@ -391,6 +380,30 @@ export default {
       chatMessages.addEventListener("scroll", this.updateGuideLinePosition);
     }
   },
+  watch: {
+    'report.report.rating': {
+      immediate: true,
+      handler(newVal) {
+        this.selectedOption = newVal;
+        this.cleanInput();
+      },
+    },
+    'report.report.status': {
+      immediate: true,
+      handler(newVal) {
+        // Actualiza el valor local cuando el valor del estado cambia
+        this.selectedStatus = newVal;
+        this.cleanInput();
+      },
+    },
+    'report.report.score': {
+      immediate: true,
+      handler(newVal) {
+        this.cleanInput();
+      },
+    },
+  },
+
 
   methods: {
     async getDataPaymet() {
@@ -502,9 +515,13 @@ export default {
       return date.toLocaleString("en-EN", options);
     },
     cleanInput() {
+      this.selectedOp = null
+      this.selectedSt = null
       this.inputData = "";
       const inputElement = this.$refs.replyEvidence;
-      inputElement.value = null;
+      if(inputElement){
+        inputElement.value = null;
+      }
 
       setTimeout(() => {
         const scrollContainer = this.$refs["chatMessages"];
@@ -551,6 +568,9 @@ export default {
             ? null
             : this.selectedSt,
       };
+      // console.log(reply);
+      // this.cleanInput();
+      // store.dispatch("setHideLoader")
       let files = this.$refs.replyEvidence.files;
       for (let i = 0; i < files.length; i++) {
         formData.append("evidence[]", files[i]);
@@ -625,6 +645,7 @@ $background-color_3: #e5e5e5;
 
 .email-top {
   display: flex;
+  flex-direction: row;
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #e5e5e5;
@@ -701,6 +722,10 @@ $background-color_3: #e5e5e5;
   flex-direction: column;
   justify-content: flex-start;
   height: calc(100vh - 70px - 28.797px - 65px - 31px);
+}
+
+.btn-score{
+  align-self: flex-end;
 }
 .row {
   --bs-gutter-x: 0;

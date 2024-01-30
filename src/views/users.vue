@@ -11,9 +11,9 @@
             </div>
             <div class="card-block row">
               <div class="col-sm-12 col-lg-12 col-xl-12">
-                <pre>
+                <!-- <pre>
                   {{ hackers }}
-                </pre>     
+                </pre>      -->
                 <DataTable :rows="hackers.hackers" striped></DataTable> 
               </div>
             </div>

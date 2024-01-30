@@ -52,6 +52,9 @@
                   </div>
                   <div class="date">
                     <p>1 year ago</p>
+                    <div class="tag" :style="scoreStyle(report.score)">
+                          {{ report.score }}
+                    </div>
                   </div>
                 </div>
                 <div class="border_btm"></div>
@@ -103,6 +106,18 @@ export default {
         return { backgroundColor: "gray" };
       }
     },
+    scoreStyle(score) {
+      const intScore = parseFloat(score);
+      if (intScore >= 7) {
+        return { backgroundColor: "green" };
+      } else if (intScore > 0) {
+        return { backgroundColor: "red" };
+      // } else if (score === "Critical") {
+      //   return { backgroundColor: "#16C7F9" };
+      } else {
+        return { backgroundColor: "gray" };
+      }
+    },
     showDetail(id) {
       const pathSegments = this.$route.path
         .split("/")
@@ -127,7 +142,6 @@ export default {
   padding-right: 5px;
   margin-left: 10px;
 }
-
 .align-second {
   display: flex;
   flex-wrap: wrap;

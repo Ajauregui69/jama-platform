@@ -4,7 +4,28 @@
   <div class="container-fluid">
     <div class="user-profile">
       <div class="row">
+        <div class="button-vulns">
+          <button
+            class="btn btn-primary"
+            type="button"
+            data-bs-toggle="modal"
+            data-original-title="test"
+            data-bs-target="#grid-modal"
+          >
+            <vue-feather class="me-1 i" type="plus-square"> </vue-feather>Add New Vulnerability
+          </button>
+        </div>
         <div class="col-sm-12">
+          <div
+            class="modal fade"
+            id="grid-modal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="grid-modal"
+            aria-hidden="true"
+          >
+            <modalVulns></modalVulns>
+          </div>
           <div class="card">
             <div class="card-header">
               <h3>Vulnerabilities</h3>
@@ -95,10 +116,14 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import modalVulns from "../components/modalVulns.vue"
 import { useLoading } from "vue3-loading-overlay";
 import store from "../store";
 
 export default {
+  components: {
+    modalVulns,
+  },
   data() {
     return {
       isRowHighlighted: -1, // Inicialmente ninguna fila resaltada
@@ -156,6 +181,17 @@ td.no-uppercase {
     #d3d5f7,
     100%
   ); 
+}
+
+.button-vulns{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.i{
+  width: 16px;
 }
 
 .empty-card {

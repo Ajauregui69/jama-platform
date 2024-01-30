@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import MainDashboard from "../views/mainDashboard.vue";
 import body from "../components/body.vue";
+import CreateProgram from "../views/createProgram/createProject.vue";
+import EditProgram from "../views/editProgram/EditProgram.vue";
 import Login from "../views/Auth/login.vue";
 import Signup from "../views/Auth/signup.vue";
 import ResetPassword from "../views/Auth/resetPassword.vue";
@@ -63,6 +65,14 @@ const router = createRouter({
           component: MainDashboard,
         },
         {
+          path: "/program/create",
+          name: "CreateProgram",
+          component: CreateProgram,
+          meta: {
+            parent: "/program/list"
+          },
+        },
+        {
           path: "/program/list",
           name: "ProgramList",
           component: ProgramList,
@@ -74,6 +84,14 @@ const router = createRouter({
           path: "/program/detail/:id",
           name: "ProgramDetail",
           component: ProgramDetail,
+          meta: {
+            parent: "/program/list"
+          },
+        },
+        {
+          path: "/program/edit/:id",
+          name: "EditProgram",
+          component: EditProgram,
           meta: {
             parent: "/program/list"
           },
@@ -201,29 +219,29 @@ const router = createRouter({
   ],
 });
 
-// let routePaths = [];
+let routePaths = [];
 
-// const extractAppRoutes = (routes, parentPath = '') => {
-//   routes.forEach((route) => {
-//     let path = route.path;
-//     path = path.replace(/\/:[^/]+/g, '');
-//     const fullPath = parentPath + (path.startsWith('/') ? path : '/' + path);
-//     routePaths.push(fullPath);
-//     if (route.children) {
-//       extractAppRoutes(route.children, fullPath);
-//     }
-//   });
-// };
+const extractAppRoutes = (routes, parentPath = '') => {
+  routes.forEach((route) => {
+    let path = route.path;
+    path = path.replace(/\/:[^/]+/g, '');
+    const fullPath = parentPath + (path.startsWith('/') ? path : '/' + path);
+    routePaths.push(fullPath);
+    if (route.children) {
+      extractAppRoutes(route.children, fullPath);
+    }
+  });
+};
 
-// const appRoute = router.options.routes.find((route) => route.path === '/app');
-// extractAppRoutes(appRoute.children);
+const appRoute = router.options.routes.find((route) => route.path === '/app');
+extractAppRoutes(appRoute.children);
 
-// router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
 
-//   const path = routePaths;
-//   if (!path.includes(to.path) || cookies.get("token_value")) {
-//     next();
-//   }
-//   next("/");
-// });
+  const path = routePaths;
+  if (!path.includes(to.path) || cookies.get("token_value")) {
+    next();
+  }
+  next("/");
+});
 export default router;

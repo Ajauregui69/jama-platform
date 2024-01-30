@@ -44,6 +44,7 @@
               <div class="title">
                 <a target="_blank" href="">{{ program.name }}</a>
               </div>
+              <!-- <p target="_blank" href="">Juan Alberto Reyna</p> -->
             </div>
           </div>
           <div class="col-sm-6 col-lg-4 order-sm-2 order-xl-2">

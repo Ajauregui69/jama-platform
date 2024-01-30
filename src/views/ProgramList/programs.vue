@@ -78,9 +78,9 @@ export default {
     },
     async handleScroll() {
       const scrollPosition = window.innerHeight + window.scrollY; 
-      console.log(scrollPosition);
-      console.log(document.body.offsetHeight);
-      console.log(this.isLoading);
+      // console.log(scrollPosition);
+      // console.log(document.body.offsetHeight);
+      // console.log(this.isLoading);
       setTimeout(() => {
             this.isLoading = false;  
             store.dispatch("setHideLoader");
@@ -347,6 +347,9 @@ export default {
                     class="description trunc"
                     v-html="htmlParser(program.description)"
                   ></span>
+                  <span class="badge badge-warning">{{
+                      program.company.company_name
+                  }}</span>
                 </div>
               </div>
             </div>
@@ -397,8 +400,16 @@ export default {
   }
 
   .media-body {
+    display: flex;
+    flex-direction: column;
     flex: 1 1 auto; /* El cuerpo se expandirá para llenar el espacio restante */
     width: calc(100% - 100px);
+  }
+
+  .badge-warning {
+    width: auto;
+    font-size: 12px;
+    align-self: flex-end;
   }
 
   .description {
